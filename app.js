@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const errorHandler = require('errorhandler');
 const lusca = require('lusca');
-// const dotenv = require('dotenv');
+const dotenv = require('dotenv');
 const MongoStore = require('connect-mongo')(session);
 const flash = require('express-flash');
 const path = require('path');
@@ -22,7 +22,7 @@ const multer = require('multer');
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-// dotenv.load({ path: '.env' });
+dotenv.load({ path: '.env' });
 
 /**
  * Controllers (route handlers).
