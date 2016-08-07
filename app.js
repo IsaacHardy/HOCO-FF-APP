@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const errorHandler = require('errorhandler');
 const lusca = require('lusca');
-const dotenv = require('dotenv');
+var dotenv = require('dotenv').config({path: '/keeper-app/.env'});
 const MongoStore = require('connect-mongo')(session);
 const flash = require('express-flash');
 const path = require('path');
@@ -22,7 +22,7 @@ const upload = multer({ dest: path.join(__dirname, 'uploads') });
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.config({ path: __dirname + '/.env' });
+
 
 /**
  * Controllers (route handlers).
