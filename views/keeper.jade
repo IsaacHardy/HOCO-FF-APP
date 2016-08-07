@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1 Keepers 2016
+  p.lead Your TDs Make My Ditka Hard
+
+  form.form-horizontal(method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group
+      label.col-sm-3.control-label(for='name') Name
+      .col-sm-7
+        input.form-control(type='text', name='name', id='name', placeholder='Player Name')
+    .form-group
+      label.col-sm-3.control-label(for='round') Round
+      .col-sm-7
+        input.form-control(type='text', name='round', id='round', placeholder='Round Drafted')
+    .form-group
+      .col-sm-offset-3.col-sm-4
+        button.btn.btn.btn-primary(type='submit')
+          i.fa.fa-pencil
+          | Submit
+
+  .panel.panel-default
+    .panel-heading Keeper Table
+    table.table.table-striped.table-bordered
+      thead
+          tr
+            th Name
+            th Round
+            th Owner
+      tbody
+      for keeper in keepers
+          tr
+            td #{keeper.name}
+            td #{keeper.round}
+            td Owner 1
