@@ -7,3 +7,9 @@ exports.index = (req, res) => {
     title: 'Home'
   });
 };
+
+exports.coming = (req, res) => {
+  res.render('coming', {
+    title: 'Coming Soon'
+  });
+};

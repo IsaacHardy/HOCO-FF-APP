@@ -16,19 +16,13 @@
         li(class=(title == 'Keepers') ? 'active' : undefined)
           a(href='/keeper') Keepers
         li(class=(title == 'Trades') ? 'active' : undefined)
-          a(href='/') Trades
-        li(class=(title == 'Draft') ? 'active' : undefined)
-          a(href='/') Draft
+          a(href='/comingsoon') League History
         li(class=(title == 'League Constitution') ? 'active' : undefined)
-          a(href='/') League Constitution
-        //- li(class=(title == 'Contact') ? 'active' : undefined)
-        //-   a(href='/contact') Contact
+          a(href='/comingsoon') League Constitution
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)
             a(href='/login') Login
-          li(class=(title == 'Create Account') ? 'active' : undefined)
-            a(href='/signup') Create Account
         else
           li.dropdown(class=(title == 'Account Management') ? 'active' : undefined)
             a.dropdown-toggle(href='#', data-toggle='dropdown')
