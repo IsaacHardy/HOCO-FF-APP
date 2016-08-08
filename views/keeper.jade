@@ -3,6 +3,7 @@ extends layout
 block content
   h1 Keepers 2016
   p.lead Your TDs Make My Ditka Hard
+  hr
 
   form.form-horizontal(method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
@@ -33,4 +34,5 @@ block content
           tr
             td #{keeper.name}
             td #{keeper.round}
-            td Owner 1
+            td #{keeper.owner}
+            td #{keeper.dateAdded}

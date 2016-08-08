@@ -2,6 +2,7 @@ const Keeper = require('../models/Keeper');
 
 exports.getKeepers = (req, res) => {
   Keeper.find().sort('-dateAdded').exec((err, keepers) => {
+    console.log("Keepers: ", keepers);
     if (err) {
       res.status(500).send(err);
     }
@@ -11,17 +12,25 @@ exports.getKeepers = (req, res) => {
 
 exports.addKeeper = (req, res, next) => {
   if (!req.body.name || !req.body.round) {
-    res.status(403).end();
+    req.flash('errors', { msg: 'Name and Round cannot be blank.' });
+    res.redirect('/keeper');
+  } else if (!req.user) {
+    req.flash('errors', { msg: 'You must be logged in to add a keeper.' });
+    res.redirect('/keeper');
+  } else {
+    const newKeeper = new Keeper({
+      name: req.body.name,
+      round: req.body.round,
+      owner: req.user.profile.name
+    });
+
+    newKeeper.save((err, saved) => {
+      if (err) { return next(err); }
+      req.flash('success', { msg: 'Success! You added your keeper.' });
+      res.redirect('/keeper');
+    });
   }
 
-  const newKeeper = new Keeper(req.body);
-
-  newKeeper.save((err, saved) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.redirect('/keeper');
-  });
 }
 
 exports.getKeeper = (req, res) => {
