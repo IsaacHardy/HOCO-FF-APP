@@ -29,7 +29,7 @@ block content
         .thumbnail
           img(src='#{user.profile.picture}', alt='...')
           .caption
-            for keeper in keepers
+            for keeper in user.keepers
               p  #{keeper.name}
               p
                 a.btn.btn-primary(href='#', role='button') Remove

@@ -2,20 +2,24 @@ const Keeper = require('../models/Keeper');
 const User = require('../models/User');
 
 exports.getKeepersPage = (req, res) => {
+  let myModel = [];
   User.find({}).exec((err, users) => {
     if (err) {
       res.status(500).send(err);
     }
-    users.forEach((u) => {
+    myModel = users;
+
+    myModel.forEach((u) => {
       Keeper.find({ ownerId: u._id})
-        .populate('ownerId')
         .exec((err, keepers) => {
-          res.render('keeper', { keepers: keepers, title: 'Keepers', users: users });
+          u.keepers = keepers;
+
+          res.render('keeper', { users: myModel, title: 'Keepers' });
         });
     });
-
-
   });
+
+  // res.render('keeper', { users: users });
 }
 
 exports.addKeeper = (req, res, next) => {
