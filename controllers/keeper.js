@@ -15,12 +15,12 @@ exports.getKeepersPage = (req, res) => {
         .exec((err, keepers) => {
           u.keepers = keepers;
 
-          if (req.user._id.toString() === u._id.toString()) {
-            keeperMax = u.keepers.length;
-            res.render('keeper', { users: myModel, title: 'Keepers', keeperMax: keeperMax });
-          } else {
-            res.render('keeper', { users: myModel, title: 'Keepers', keeperMax: keeperMax });
-          }
+          // if (req.user._id.toString() === u._id.toString()) {
+          //   keeperMax = u.keepers.length;
+          //   res.render('keeper', { users: myModel, title: 'Keepers', keeperMax: keeperMax });
+          // } else {
+          // }
+          res.render('keeper', { users: myModel, title: 'Keepers'});
         });
     });
   });
