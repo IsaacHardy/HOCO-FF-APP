@@ -10,12 +10,12 @@ exports.getKeepersPage = (req, res) => {
     myModel = users;
 
     myModel.forEach((u) => {
+      let keeperMax = 0;
       Keeper.find({ ownerId: u._id})
         .exec((err, keepers) => {
-          let keeperMax = 0;
           u.keepers = keepers;
 
-          if (req.user._id.toString() == u._id.toString()) {
+          if (req.user._id.toString() === u._id.toString()) {
             keeperMax = u.keepers.length;
             res.render('keeper', { users: myModel, title: 'Keepers', keeperMax: keeperMax });
           } else {
@@ -43,11 +43,7 @@ exports.addKeeper = (req, res, next) => {
 
     newKeeper.save((err, saved) => {
       if (err) { return next(err); }
-      Keeper.find({})
-        .populate('ownerId')
-        .exec((err, keepers)=> {
-          console.log(JSON.stringify(keepers, null, "\t"))
-        });
+
       req.flash('success', { msg: 'Success! You added your keeper.' });
       res.redirect('/keeper');
     });
