@@ -120,7 +120,7 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 /**
  *
  */
-app.get('/keeper', keeperController.getKeepers);
+app.get('/keeper', keeperController.getKeepersPage);
 app.post('/keeper', keeperController.addKeeper);
 
 

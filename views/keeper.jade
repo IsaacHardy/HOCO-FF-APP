@@ -21,18 +21,15 @@ block content
           i.fa.fa-pencil
           | Submit
 
-  .panel.panel-default
-    .panel-heading Keeper Table
-    table.table.table-striped.table-bordered
-      thead
-          tr
-            th Name
-            th Round
-            th Owner
-      tbody
-      for keeper in keepers
-          tr
-            td #{keeper.name}
-            td #{keeper.round}
-            td #{keeper.owner}
-            td #{keeper.dateAdded}
+
+  .row
+    for user in users
+      .col-sm-6.col-md-4
+        h3 #{user.profile.name}
+        .thumbnail
+          img(src='#{user.profile.picture}', alt='...')
+          .caption
+            for keeper in keepers
+              p  #{keeper.name}
+              p
+                a.btn.btn-primary(href='#', role='button') Remove

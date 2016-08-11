@@ -1,12 +1,20 @@
 const Keeper = require('../models/Keeper');
+const User = require('../models/User');
 
-exports.getKeepers = (req, res) => {
-  Keeper.find().sort('-dateAdded').exec((err, keepers) => {
-    console.log("Keepers: ", keepers);
+exports.getKeepersPage = (req, res) => {
+  User.find({}).exec((err, users) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.render('keeper', { keepers: keepers, title: 'Keepers' });
+    users.forEach((u) => {
+      Keeper.find({ ownerId: u._id})
+        .populate('ownerId')
+        .exec((err, keepers) => {
+          res.render('keeper', { keepers: keepers, title: 'Keepers', users: users });
+        });
+    });
+
+
   });
 }
 
@@ -21,11 +29,17 @@ exports.addKeeper = (req, res, next) => {
     const newKeeper = new Keeper({
       name: req.body.name,
       round: req.body.round,
-      owner: req.user.profile.name
+      ownerId: req.user._id,
+      ownerName: req.user.profile.name
     });
 
     newKeeper.save((err, saved) => {
       if (err) { return next(err); }
+      Keeper.find({})
+        .populate('ownerId')
+        .exec((err, keepers)=> {
+          console.log(JSON.stringify(keepers, null, "\t"))
+        });
       req.flash('success', { msg: 'Success! You added your keeper.' });
       res.redirect('/keeper');
     });
