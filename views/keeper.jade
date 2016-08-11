@@ -5,8 +5,8 @@ block content
   p.lead Your TDs Make My Ditka Hard
   hr
 
-
-  form.form-horizontal(method='POST')
+  if (keeperMax < 2)
+    form.form-horizontal(method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group
         label.col-sm-3.control-label(for='name') Name
@@ -21,7 +21,8 @@ block content
           button.btn.btn.btn-primary(type='submit')
             i.fa.fa-pencil
             | Submit
-
+  else
+    h3 Remove one of your current keepers, to add a new one.
 
   .row
     for user in users
