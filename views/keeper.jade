@@ -5,7 +5,7 @@ block content
   p.lead Your TDs Make My Ditka Hard
   hr
 
-  if (users.keeperMax < 2)
+  if (keeperMax < 2)
     form.form-horizontal(method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group

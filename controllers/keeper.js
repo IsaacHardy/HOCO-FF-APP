@@ -12,10 +12,13 @@ exports.getKeepersPage = (req, res) => {
     myModel.forEach((u) => {
       Keeper.find({ ownerId: u._id})
         .exec((err, keepers) => {
+          let keeperMax = 0;
           u.keepers = keepers;
-          u.keeperMax = keepers.length;
 
-          res.render('keeper', { users: myModel, title: 'Keepers' });
+          if (req.user._id.toString() == u._id.toString()) {
+            keeperMax = u.keepers.length;
+          }
+          res.render('keeper', { users: myModel, title: 'Keepers', keeperMax: keeperMax });
         });
     });
   });
