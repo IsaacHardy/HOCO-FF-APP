@@ -13,6 +13,7 @@
       ul.nav.navbar-nav
         li(class=(title == 'Home') ? 'active' : undefined)
           a(href='/') Home
+        if user
         li(class=(title == 'Keepers') ? 'active' : undefined)
           a(href='/keeper') Keepers
         li(class=(title == 'Trades') ? 'active' : undefined)
