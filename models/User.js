@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   passwordResetToken: String,
   passwordResetExpires: Date,
 
+  keeperMax: { type: Number, default: null },
   facebook: String,
   google: String,
   tokens: Array,

@@ -13,13 +13,12 @@ exports.getKeepersPage = (req, res) => {
       Keeper.find({ ownerId: u._id})
         .exec((err, keepers) => {
           u.keepers = keepers;
+          u.keeperMax = keepers.length;
 
           res.render('keeper', { users: myModel, title: 'Keepers' });
         });
     });
   });
-
-  // res.render('keeper', { users: users });
 }
 
 exports.addKeeper = (req, res, next) => {
