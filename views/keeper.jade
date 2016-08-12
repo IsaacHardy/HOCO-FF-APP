@@ -25,13 +25,13 @@ block content
     h3 Remove one of your current keepers, to add a new one.
 
   .row
-    for user in users
-      .col-sm-6.col-md-4
-        h3 #{user.profile.name}
-        .thumbnail
-          img(src='#{user.profile.picture}', alt='...')
-          .caption
-            for keeper in user.keepers
-              p  #{keeper.name}
-              p
-                a.btn.btn-primary(href='#', role='button') Remove
+  for user in users
+    .col-sm-6.col-md-4
+      h3 #{user.profile.name}
+      .thumbnail
+        img(src='#{user.profile.picture}', alt='...')
+        .caption
+        for keeper in user.keepers
+          p  #{keeper.name}
+          p
+            a.btn.btn-primary(href='#', role='button') Remove

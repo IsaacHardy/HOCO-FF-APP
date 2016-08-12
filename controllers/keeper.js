@@ -17,9 +17,9 @@ exports.getKeepersPage = (req, res) => {
 
           if (req.user._id.toString() === u._id.toString()) {
             keeperMax = u.keepers.length;
-            res.render('keeper', { users: myModel, keeperMax: keeperMax });
+            res.render('keeper', { users: myModel, title: 'users', keeperMax: keeperMax });
           } else {
-            res.render('keeper', { users: myModel, keeperMax: keeperMax });
+            res.render('keeper', { users: myModel, title: 'users', keeperMax: keeperMax });
           }
         });
     });
@@ -29,9 +29,6 @@ exports.getKeepersPage = (req, res) => {
 exports.addKeeper = (req, res, next) => {
   if (!req.body.name || !req.body.round) {
     req.flash('errors', { msg: 'Name and Round cannot be blank.' });
-    res.redirect('/keeper');
-  } else if (!req.user) {
-    req.flash('errors', { msg: 'You must be logged in to add a keeper.' });
     res.redirect('/keeper');
   } else {
     const newKeeper = new Keeper({
