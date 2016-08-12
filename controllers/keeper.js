@@ -1,25 +1,29 @@
 const Keeper = require('../models/Keeper');
 const User = require('../models/User');
+const async = require('async');
 
 exports.getKeepersPage = (req, res) => {
   let myModel = [];
+  let keeperMax = 0;
   User.find({}).exec((err, users) => {
-    if (err) {
-      res.status(500).send(err);
-    }
     myModel = users;
 
+    let numRunningQueries = 0;
+
     myModel.forEach((u) => {
-      let keeperMax = 0;
+      ++numRunningQueries;
       Keeper.find({ ownerId: u._id})
         .exec((err, keepers) => {
           u.keepers = keepers;
 
           if (req.user._id.toString() === u._id.toString()) {
             keeperMax = u.keepers.length;
-            res.render('keeper', { users: myModel, title: 'users', keeperMax: keeperMax });
-          } else {
-            res.render('keeper', { users: myModel, title: 'users', keeperMax: keeperMax });
+          }
+
+          --numRunningQueries;
+          if (numRunningQueries === 0) {
+
+             res.render('keeper', { users: myModel, keeperMax: keeperMax });
           }
         });
     });
