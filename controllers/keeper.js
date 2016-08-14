@@ -66,6 +66,7 @@ exports.deleteKeeper = (req, res) => {
       });
     } else {
       req.flash('errors', { msg: 'You do not have permission to delete this keeper.' });
+      res.redirect('/keeper');
     }
   });
 }
