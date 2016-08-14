@@ -57,10 +57,15 @@ exports.deleteKeeper = (req, res) => {
     if (err) {
       res.status(500).send(err);
     }
+    console.log(keeper);
 
-    keeper.remove(() => {
-      req.flash('info', { msg: 'You have successfully deleted your keeper.' });
-      res.redirect('/keeper');
-    });
+    if (keeper.ownerId.toString() === req.user._id.toString()) {
+      keeper.remove(() => {
+        req.flash('info', { msg: 'You have successfully deleted your keeper.' });
+        res.redirect('/keeper');
+      });
+    } else {
+      req.flash('errors', { msg: 'You do not have permission to delete this keeper.' });
+    }
   });
 }
