@@ -52,22 +52,16 @@ exports.addKeeper = (req, res, next) => {
 
 }
 
-exports.getKeeper = (req, res) => {
-  Keeper.findOne({ _id: req.body.keeper._id }).exec((err, keeper) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
-}
-
 exports.deleteKeeper = (req, res) => {
-  Keeper.findOne({ _id: req.body.keeper._id }).exec((err, keeper) => {
+  Keeper.findOne({ _id: req.params.id }).exec((err, keeper) => {
     if (err) {
       res.status(500).send(err);
     }
 
     keeper.remove(() => {
+      req.flash('info', { msg: 'You have successfully deleted your keeper.' });
       res.status(200).end();
+      res.redirect('/keeper');
     });
   });
 }

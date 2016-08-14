@@ -35,4 +35,4 @@ block content
           for keeper in user.keepers
             p  #{keeper.name}
             p
-              a.btn.btn-primary(href='#', role='button') Remove
+              a.btn.btn-primary(href='/keeper/#{keeper._id}', role='button') Remove

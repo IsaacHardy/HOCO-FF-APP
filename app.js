@@ -122,6 +122,7 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
  */
 app.get('/keeper', keeperController.getKeepersPage);
 app.post('/keeper', keeperController.addKeeper);
+app.get('/keeper/:id', keeperController.deleteKeeper);
 
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
