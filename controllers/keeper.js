@@ -60,7 +60,6 @@ exports.deleteKeeper = (req, res) => {
 
     keeper.remove(() => {
       req.flash('info', { msg: 'You have successfully deleted your keeper.' });
-      res.status(200).end();
       res.redirect('/keeper');
     });
   });
