@@ -22,17 +22,35 @@ block content
             i.fa.fa-pencil
             | Submit
   else
-    h3 Remove one of your current keepers, to add a new one.
+    h3.remove-keepers Remove one of your current keepers, to add a new one.
 
   .row
   for user in users
-    .col-sm-6.col-md-4
+    .col-sm-6.col-md-3
       h3 #{user.profile.name}
       .thumbnail
         img(src='#{user.profile.picture}', alt='...')
-        .caption
-        if (user.keepers)
-          for keeper in user.keepers
-            p  #{keeper.name}
-            p
-              a.btn.btn-primary(href='/keeper/#{keeper._id}', role='button') Remove
+        if (user.keepers.length == 2)
+          .panel.panel-success
+            .panel-heading Keepers
+              .container-fluid
+                .row
+                for keeper in user.keepers
+                  a.btn.btn-default.disabled.col-xs-10(href='#', role='button') #{keeper.name} in the #{keeper.round}
+                  a.btn.btn-danger.col-xs-2(href='/keeper/#{keeper._id}', role='button')
+                    i.fa.fa-trash(aria-hidden='true')
+        if (user.keepers.length == 1)
+          .panel.panel-warning
+            .panel-heading Keepers
+              .container-fluid
+                .row
+                for keeper in user.keepers
+                  a.btn.btn-default.disabled.col-xs-10(href='#', role='button') #{keeper.name} in the #{keeper.round}
+                  a.btn.btn-danger.col-xs-2(href='/keeper/#{keeper._id}', role='button')
+                    i.fa.fa-trash(aria-hidden='true')
+        if (user.keepers.length == 0)
+          .panel.panel-danger
+            .panel-heading Keepers
+              .container-fluid
+                .row
+                a.btn.btn-default.disabled.col-xs-12(href='#', role='button') No Keepers Submitted
