@@ -31,12 +31,13 @@ exports.getKeepersPage = (req, res) => {
 }
 
 exports.addKeeper = (req, res, next) => {
-  if (!req.body.name || !req.body.round) {
-    req.flash('errors', { msg: 'Name and Round cannot be blank.' });
+  if (!req.body.firstName || !req.body.lastName || !req.body.round) {
+    req.flash('errors', { msg: 'First Name, Last Name, and Round cannot be blank.' });
     res.redirect('/keeper');
   } else {
     const newKeeper = new Keeper({
-      name: req.body.name,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       round: req.body.round,
       ownerId: req.user._id,
       ownerName: req.user.profile.name

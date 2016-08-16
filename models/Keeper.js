@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const keeperSchema = new Schema({
-  name: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   round: { type: String, required: true },
   ownerId: { type: Schema.Types.ObjectId, ref: 'User' },
   ownerName: { type: String, required: true },

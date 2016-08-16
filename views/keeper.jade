@@ -9,13 +9,33 @@ block content
     form.form-horizontal(method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group
-        label.col-sm-3.control-label(for='name') Name
+        label.col-sm-3.control-label(for='firstName') First Name
         .col-sm-7
-          input.form-control(type='text', name='name', id='name', placeholder='Player Name')
+          input.form-control(type='text', name='firstName', id='firstName')
+      .form-group
+        label.col-sm-3.control-label(for='lastName') Last Name
+        .col-sm-7
+          input.form-control(type='text', name='lastName', id='lastName')
       .form-group
         label.col-sm-3.control-label(for='round') Round
         .col-sm-7
-          input.form-control(type='text', name='round', id='round', placeholder='Round Drafted')
+          select.form-control(type='text', name='round', id='round')
+            option 1st
+            option 2nd
+            option 3rd
+            option 4th
+            option 5th
+            option 6th
+            option 7th
+            option 8th
+            option 9th
+            option 10th
+            option 11th
+            option 12th
+            option 13th
+            option 14th
+            option 15th
+            option 16th
       .form-group
         .col-sm-offset-3.col-sm-4
           button.btn.btn.btn-primary(type='submit')
@@ -36,18 +56,35 @@ block content
               .container-fluid
                 .row
                 for keeper in user.keepers
-                  a.btn.btn-default.disabled.col-xs-10(href='#', role='button') #{keeper.name} in the #{keeper.round}
-                  a.btn.btn-danger.col-xs-2(href='/keeper/#{keeper._id}', role='button')
-                    i.fa.fa-trash(aria-hidden='true')
+                  - var firstName = keeper.firstName.charAt(0).toUpperCase() + keeper.firstName.slice(1);
+                  - var lastName = keeper.lastName.charAt(0).toUpperCase() + keeper.lastName.slice(1);
+                  if ((firstName.split("").length + lastName.split("").length) > 15)
+                    - var sliceNum = 1 - firstName.split("").length;
+                    - var shortFirstName = firstName.slice(0, sliceNum) + '.';
+                    a.btn.btn-default.disabled.col-xs-10(href='#', role='button') #{shortFirstName} #{lastName} in the #{keeper.round}
+                    a.btn.btn-danger.col-xs-2(href='/keeper/#{keeper._id}', role='button')
+                      i.fa.fa-trash(aria-hidden='true')
+                  else
+                    a.btn.btn-default.disabled.col-xs-10(href='#', role='button') #{firstName} #{lastName} in the #{keeper.round}
+                    a.btn.btn-danger.col-xs-2(href='/keeper/#{keeper._id}', role='button')
+                      i.fa.fa-trash(aria-hidden='true')
         if (user.keepers.length == 1)
           .panel.panel-warning
             .panel-heading Keepers
               .container-fluid
                 .row
                 for keeper in user.keepers
-                  a.btn.btn-default.disabled.col-xs-10(href='#', role='button') #{keeper.name} in the #{keeper.round}
-                  a.btn.btn-danger.col-xs-2(href='/keeper/#{keeper._id}', role='button')
-                    i.fa.fa-trash(aria-hidden='true')
+                  - var firstName = keeper.firstName.charAt(0).toUpperCase() + keeper.firstName.slice(1);
+                  - var lastName = keeper.lastName.charAt(0).toUpperCase() + keeper.lastName.slice(1);
+                  if (firstName.split("").length > 8)
+                    - var shortFirstName = firstName.slice(4) + '.';
+                    a.btn.btn-default.disabled.col-xs-10(href='#', role='button') #{shortFirstName} #{lastName} in the #{keeper.round}
+                    a.btn.btn-danger.col-xs-2(href='/keeper/#{keeper._id}', role='button')
+                      i.fa.fa-trash(aria-hidden='true')
+                  else
+                    a.btn.btn-default.disabled.col-xs-10(href='#', role='button') #{firstName} #{lastName} in the #{keeper.round}
+                    a.btn.btn-danger.col-xs-2(href='/keeper/#{keeper._id}', role='button')
+                      i.fa.fa-trash(aria-hidden='true')
         if (user.keepers.length == 0)
           .panel.panel-danger
             .panel-heading Keepers

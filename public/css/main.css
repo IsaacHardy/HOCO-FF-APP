@@ -8937,11 +8937,12 @@ button.close {
   border-radius: 20px 20px 0 0; }
 
 .panel {
-  margin-bottom: 0;
   z-index: 2;
-  margin-top: -20px;
-  position: relative;
-  border-radius: 20px 20px 0 0; }
+  position: absolute;
+  border-radius: 20px 20px 0 0;
+  bottom: -20px;
+  left: 0px;
+  width: 100%; }
 
 html {
   position: relative;
