@@ -76,8 +76,9 @@ block content
                 for keeper in user.keepers
                   - var firstName = keeper.firstName.charAt(0).toUpperCase() + keeper.firstName.slice(1);
                   - var lastName = keeper.lastName.charAt(0).toUpperCase() + keeper.lastName.slice(1);
-                  if (firstName.split("").length > 8)
-                    - var shortFirstName = firstName.slice(4) + '.';
+                  if ((firstName.split("").length + lastName.split("").length) > 15)
+                    - var sliceNum = 1 - firstName.split("").length;
+                    - var shortFirstName = firstName.slice(0, sliceNum) + '.';
                     a.btn.btn-default.disabled.col-xs-10(href='#', role='button') #{shortFirstName} #{lastName} in the #{keeper.round}
                     a.btn.btn-danger.col-xs-2(href='/keeper/#{keeper._id}', role='button')
                       i.fa.fa-trash(aria-hidden='true')
