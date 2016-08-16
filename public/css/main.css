@@ -8938,11 +8938,10 @@ button.close {
 
 .panel {
   z-index: 2;
-  position: absolute;
+  position: relative;
   border-radius: 20px 20px 0 0;
-  bottom: -20px;
-  left: 0px;
-  width: 100%; }
+  margin-top: -35px;
+  margin-bottom: 0; }
 
 html {
   position: relative;
