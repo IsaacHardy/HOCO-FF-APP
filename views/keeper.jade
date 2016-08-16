@@ -81,13 +81,15 @@ block content
                     a.btn.btn-default.disabled.col-xs-10(href='#', role='button') #{shortFirstName} #{lastName} in the #{keeper.round}
                     a.btn.btn-danger.col-xs-2(href='/keeper/#{keeper._id}', role='button')
                       i.fa.fa-trash(aria-hidden='true')
+                    a.btn.btn-default.disabled.col-xs-12(href='#', role='button') No Keeper Submitted
                   else
                     a.btn.btn-default.disabled.col-xs-10(href='#', role='button') #{firstName} #{lastName} in the #{keeper.round}
                     a.btn.btn-danger.col-xs-2(href='/keeper/#{keeper._id}', role='button')
                       i.fa.fa-trash(aria-hidden='true')
+                    a.btn.btn-default.disabled.col-xs-12(href='#', role='button') No Keeper Submitted
         if (user.keepers.length == 0)
           .panel.panel-danger
             .panel-heading Keepers
               .container-fluid
-                a.btn.btn-default.disabled.col-xs-12(href='#', role='button') No Keepers Submitted
-                a.btn.btn-default.disabled.col-xs-12(href='#', role='button') No Keepers Submitted
+                a.btn.btn-default.disabled.col-xs-12(href='#', role='button') No Keeper Submitted
+                a.btn.btn-default.disabled.col-xs-12(href='#', role='button') No Keeper Submitted
