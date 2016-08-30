@@ -5,44 +5,44 @@ block content
   p.lead Your TDs Make My Ditka Hard
   hr
 
-  if (keeperMax < 2)
-    form.form-horizontal(method='POST')
-      input(type='hidden', name='_csrf', value=_csrf)
-      .form-group
-        label.col-sm-3.control-label(for='firstName') First Name
-        .col-sm-7
-          input.form-control(type='text', name='firstName', id='firstName')
-      .form-group
-        label.col-sm-3.control-label(for='lastName') Last Name
-        .col-sm-7
-          input.form-control(type='text', name='lastName', id='lastName')
-      .form-group
-        label.col-sm-3.control-label(for='round') Round
-        .col-sm-7
-          select.form-control(type='text', name='round', id='round')
-            option 1st
-            option 2nd
-            option 3rd
-            option 4th
-            option 5th
-            option 6th
-            option 7th
-            option 8th
-            option 9th
-            option 10th
-            option 11th
-            option 12th
-            option 13th
-            option 14th
-            option 15th
-            option 16th
-      .form-group
-        .col-sm-offset-3.col-sm-4
-          button.btn.btn.btn-primary(type='submit')
-            i.fa.fa-pencil
-            | Submit
-  else
-    h3.remove-keepers Remove one of your current keepers, to add a new one.
+  //- if (keeperMax < 2)
+  //-   form.form-horizontal(method='POST')
+  //-     input(type='hidden', name='_csrf', value=_csrf)
+  //-     .form-group
+  //-       label.col-sm-3.control-label(for='firstName') First Name
+  //-       .col-sm-7
+  //-         input.form-control(type='text', name='firstName', id='firstName')
+  //-     .form-group
+  //-       label.col-sm-3.control-label(for='lastName') Last Name
+  //-       .col-sm-7
+  //-         input.form-control(type='text', name='lastName', id='lastName')
+  //-     .form-group
+  //-       label.col-sm-3.control-label(for='round') Round
+  //-       .col-sm-7
+  //-         select.form-control(type='text', name='round', id='round')
+  //-           option 1st
+  //-           option 2nd
+  //-           option 3rd
+  //-           option 4th
+  //-           option 5th
+  //-           option 6th
+  //-           option 7th
+  //-           option 8th
+  //-           option 9th
+  //-           option 10th
+  //-           option 11th
+  //-           option 12th
+  //-           option 13th
+  //-           option 14th
+  //-           option 15th
+  //-           option 16th
+  //-     .form-group
+  //-       .col-sm-offset-3.col-sm-4
+  //-         button.btn.btn.btn-primary(type='submit')
+  //-           i.fa.fa-pencil
+  //-           | Submit
+  //- else
+  //-   h3.remove-keepers Remove one of your current keepers, to add a new one.
 
   .row
   for user in users
