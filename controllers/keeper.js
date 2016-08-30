@@ -16,7 +16,7 @@ exports.getKeepersPage = (req, res) => {
         .exec((err, keepers) => {
           u.keepers = keepers;
 
-          if (req.user._id.toString() === u._id.toString()) {
+          if (req.user._id && req.user._id.toString() === u._id.toString()) {
             keeperMax = u.keepers.length;
           }
 
