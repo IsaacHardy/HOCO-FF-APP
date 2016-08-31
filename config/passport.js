@@ -64,19 +64,17 @@ passport.use(new FacebookStrategy({
         req.flash('errors', { msg: 'There is already a Facebook account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
         done(err);
       } else {
-        setTimeout(function() {
-          User.findById(req.user.id, (err, user) => {
-            user.facebook = profile.id;
-            user.tokens.push({ kind: 'facebook', accessToken });
-            user.profile.name = user.profile.name || profile.name.givenName + ' ' + profile.name.familyName;
-            user.profile.gender = user.profile.gender || profile._json.gender;
-            user.profile.picture = user.profile.picture || `https://graph.facebook.com/${profile.id}/picture?type=large`;
-            user.save((err) => {
-              req.flash('info', { msg: 'Facebook account has been linked.' });
-              done(err, user);
-            });
+        User.findById(req.user.id, (err, user) => {
+          user.facebook = profile.id;
+          user.tokens.push({ kind: 'facebook', accessToken });
+          user.profile.name = user.profile.name || profile.name.givenName + ' ' + profile.name.familyName;
+          user.profile.gender = user.profile.gender || profile._json.gender;
+          user.profile.picture = user.profile.picture || `https://graph.facebook.com/${profile.id}/picture?type=large`;
+          user.save((err) => {
+            req.flash('info', { msg: 'Facebook account has been linked.' });
+            done(err, user);
           });
-        },0);
+        });
       }
     });
   } else {
@@ -85,7 +83,6 @@ passport.use(new FacebookStrategy({
         return done(null, existingUser);
       }
       User.findOne({ email: profile._json.email }, (err, existingEmailUser) => {
-        console.log("existing email user::::", existingEmailUser);
         if (existingEmailUser) {
           req.flash('errors', { msg: 'There is already an account using this email address. Sign in to that account and link it with Facebook manually from Account Settings.' });
           done(err);
